@@ -2,9 +2,9 @@ Opti-Mill is a G-Code creator for creating simple shapes without requiring or le
 
 <img width="902" height="837" alt="image" src="https://github.com/user-attachments/assets/5fe4d6f2-1827-440b-9a97-03d9876b1300" />
 
-Opti-Mill - The G-Code Creator for CNC Mill using GRBL - FluidNC motion controlller, CNCjs and Raspberry PI 4, 5.  Programmed using Windows 11 - VS Code so it should be Windows friendly.  Please help educate me where possible to improve this program.  As always positive comments are appriciated.  Negative comments are welcome but please have a solution with it or create your own program.  With that said, if you are tired of learning new softwares or paying for a decent g-code creator give this a try.  I have 15 years of R&D experience and plenty of discussions on optimizing manufacturing processes of piece to the drawing/manufacturing level.
+Opti-Mill - The G-Code Creator for CNC Mill using GRBL - FluidNC motion controlller, CNCjs and Raspberry PI 4, 5.  Programmed using Windows 11 - VS Code so it should be Windows friendly.  Please help educate me where possible to improve this program.  As always positive comments are appriciated.  Negative comments are welcome but please have a solution with it start your own program and comment on it.  With that said, if you are tired of learning new softwares or paying for a decent g-code creator give this a try.  I have over 15 years of R&D experience and plenty of discussions on optimizing manufacturing processes for parts going through the desing, drawing and manufacturing stages.
 
-Please remember a pocket can be used for fly-cutting.  Just make it a small distance to cut, touch off, set zero and go. 
+Please remember a pocket can be used for fly-cutting.  Just make it a small distance to cut Z height, touch off, set zero and go. 
 
  ##### Disclaimer: ##### 
 
