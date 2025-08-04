@@ -1,0 +1,81 @@
+{
+	"boltCircle": {
+		"c_x": 0,
+		"c_y": 0,
+		"n": 0,
+		"r": 0,
+		"depth": 0
+	},
+
+	"rectPocket": {
+		"c_x": 0,
+		"c_y": 0,
+		"x": 0,
+		"y": 0,
+		"z_top": 0,
+		"z_bottom": 0,
+		"z_step": 0
+	},
+
+	"frame": {
+		"c_x": 0,
+		"c_y": 0,
+		"x": 0,
+		"y": 0,
+		"z_top": 0,
+		"z_bottom": 0,
+		"z_step": 0,
+		"inside": false,
+		"retract": true
+	},
+
+	"helix": {
+		"c_x": 0,
+		"c_y": 0,
+		"diameter": 0,
+		"depth": 0,
+		"z_step": 0,
+		"outside": false,
+		"retract": false
+	},
+
+	"millDrill": {
+		"c_x": 0,
+		"c_y": 0,
+		"diameter": 0,
+		"depth": 0,
+		"z_step": 0,
+		"retract": false
+	},
+
+	"pocketCircle": {
+		"c_x": 0,
+		"c_y": 0,
+		"n": 0,
+		"r": 0,
+		"depth": 0,
+		"diameter": 0
+	},
+
+	"circularPocket": {
+		"c_x": 0,
+		"c_y": 0,
+		"diameter": 0,
+		"depth": 0,
+		"step": 0,
+		"finish": 0,
+		"retract": true
+	},
+
+	"legacyPocket": {
+		"c_x": 0,
+		"c_y": 0,
+		"x": 0,
+		"y": 0, 
+		"depth": 0,
+		"step": 0,
+		"finish": 0.1,
+		"undercut": false,
+		"retract": true 
+	}
+}
