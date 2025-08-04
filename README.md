@@ -1,4 +1,4 @@
-Opti-Mill is a G-Code creator for creating simple shapes without requiring or learning a complicated CAM package. My test bed is a Sherline CNC Mill using GRBL - FluidNC motion controller, CNCjs and Raspberry PI.  If you have a CNC-ready Sherline that's waiting for servo motors, driver and software.  Hopefully this helps.
+Opti-Mill is a G-Code creator for creating simple shapes without requiring or learning a complicated CAM package. My test bed is a Sherline CNC Mill using GRBL - FluidNC motion controller, CNCjs and a Raspberry Pi.  If you have a CNC-ready Sherline that's waiting for stepper motors, a controller board and software.  Hopefully this helps show you the direction I took to convert a used manual Sherline mill into a CNC.
 
 <img width="902" height="837" alt="image" src="https://github.com/user-attachments/assets/5fe4d6f2-1827-440b-9a97-03d9876b1300" />
 
