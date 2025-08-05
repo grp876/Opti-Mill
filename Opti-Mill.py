@@ -369,14 +369,13 @@ class MillApp:
         
         # Motion method mapping for cleaner labels
         self.motion_method_map = {
-            "boltCircle": {"method": "bolt_circle", "label": "Bolt Circle"},
-            "rectPocket": {"method": "rectangular_pocket", "label": "Rectangular Pocket"},
-            "frame": {"method": "frame", "label": "Frame"},
-            "helix": {"method": "helix", "label": "Helix"},
-            "millDrill": {"method": "mill_drill", "label": "Mill Drill"},
-            "pocketCircle": {"method": "pocket_circle", "label": "Pocket Circle"},
-            "circularPocket": {"method": "circular_pocket", "label": "Circular Pocket"},
-            "legacyPocket": {"method": "legacy_pocket", "label": "Legacy Pocket"}
+            "boltCircle": {"method": "bolt_circle", "label": "  Bolt Circle  "},
+            "frame": {"method": "frame", "label": "  Frame  "},
+            "helix": {"method": "helix", "label": "  Helix  "},
+            "millDrill": {"method": "mill_drill", "label": "  Mill Drill  "},
+            "pocketCircle": {"method": "pocket_circle", "label": "  Pocket Circle  "},
+            "circularPocket": {"method": "circular_pocket", "label": "  Circular Pocket  "},
+            "legacyPocket": {"method": "legacy_pocket", "label": "  Rect Pocket or Face Mill  "}
         }
 
         # Build the user interface

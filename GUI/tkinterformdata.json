@@ -7,16 +7,6 @@
 		"depth": 0
 	},
 
-	"rectPocket": {
-		"c_x": 0,
-		"c_y": 0,
-		"x": 0,
-		"y": 0,
-		"z_top": 0,
-		"z_bottom": 0,
-		"z_step": 0
-	},
-
 	"frame": {
 		"c_x": 0,
 		"c_y": 0,

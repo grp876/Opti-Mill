@@ -325,7 +325,7 @@ class Turtle:
         if z is not None:
             self._z_draw = z
         self._z = self._z_draw
-        self._machine.linear_interpolation(z=self._z, comment="Pendown" if self._verbose else None)
+        self._machine.linear_interpolation(z=self._z, comment="Tool Down" if self._verbose else None)
 
     pd = pendown
     down = pendown
@@ -340,7 +340,7 @@ class Turtle:
 
     def penup(self):
         self._isdown = False
-        self._machine.retract(comment="Penup" if self._verbose else None)
+        self._machine.retract(comment="Tool Up" if self._verbose else None)
         self._z = self._machine.safe_z
 
     pu = penup

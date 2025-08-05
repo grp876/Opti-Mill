@@ -43,10 +43,6 @@ class Machine:
                     raise ValueError(f"{RED}All machines must have '{req}' defined in their JSON config.  See https://github.com/cilynx/pygdk/tree/main/machines for example configurations.")
             self.name = self.dict['Name']
             self.command_queue = [{'comment': f"Initializing Machine {self.name}", 'style': 'machine'}]
-#            self.controller = Controller(self.dict.get('Controller', None)) if self.dict.get('Controller', None) else None
-#            self.accessories = None
-#            if self.dict.get('Accessories', None):
-#                self.accessories = [Accessory(name, self.dict['Accessories'][name]) for name in self.dict['Accessories']]
             self.max_feed = self.dict['Max Feed Rate (mm/min)']
             self._x_offset = 0
             self._y_offset = 0
@@ -96,13 +92,9 @@ class Machine:
 
     def queue(self, **kwargs):
         self.command_queue.append(kwargs)
-        #xlist = kwargs
-        #print(type(xlist))
-        #print(xlist)
         
-
 ################################################################################
-# CAMotics-compatible Tool Table - Need to FIX
+# Tool Table House Keeping
 ################################################################################
 
     def tool_from_tool_table(self, i):
@@ -158,8 +150,6 @@ class Machine:
         else:
             self.queue(comment=f"Select Tool {tool}", style='machine')
         self.queue(comment=f"End Tool Change", style='machine')
-#        if self.material:
-#            self.update_fas()
 
 ################################################################################
 # Tool Offsets
@@ -203,8 +193,6 @@ class Machine:
     @material.setter
     def material(self,value):
         self._material = value
-#       if self.tool:
-#       self.update_fas()
         return self.material
 
 ################################################################################
@@ -542,116 +530,11 @@ class Machine:
     rectangle = frame
 
 ################################################################################
-# Rectangular Pocket
-################################################################################
-
-    def rectangular_pocket(self, c_x, c_y, x, y, z_top=0, z_bottom=0, step=None, z_step=None, finish=0, undercut=False, retract=True):
-        self.queue(comment=f"Turtle Pocket | center: {['{:.4f}'.format(c_x), '{:.4f}'.format(c_y)]}, x: {x:.4f}, y: {y:.4f}, z_top: {z_top}, z_bottom: {z_bottom}, step: {step}, z_step: {z_step}, finish: {finish}, undercut: {undercut}, retract: {retract}", style='feature')
-        if not self.tool:
-            raise ValueError(f"{RED}You can't cut a pocket without selecting a tool first")
-        if self.tool.diameter > x or self.tool.diameter > y:
-            raise ValueError(f"{RED}Tool {self.tool.number} is too big ({self.tool.diameter:.4f} mm) to make this small ({[x,y]} mm) of a pocket{ENDC}")
-        depth = z_top - z_bottom
-        if depth <= 0:
-            raise ValueError(f"{RED}Pocket z_bottom must be lower than z_top")
-        if depth > self.tool.max_depth:
-            raise ValueError(f"{RED}Pocket is deeper ({depth} mm) than Tool {self.tool.number} can cut ({self.tool.length:.4f} mm){ENDC}")
-        if depth > self.tool.flute_length:
-            passes = math.ceil(depth/self.tool.flute_length)
-            z_pass = depth/passes
-            for i in range(passes):
-                self.rectangular_pocket(c_x, c_y, x-2*finish, y-2*finish, z_top-i*z_pass, z_top-(i+1)*z_pass, step, z_step, None, undercut, retract if i==passes-1 else False)
-            if finish:
-                self.frame(c_x, c_y, x, y, z_top, z_bottom, step, inside=True, feature="Finishing pass inside depth")
-                #TODO: Implement frame undercut
-            return
-        if finish:
-            self.rectangular_pocket(c_x, c_y, x-2*finish, y-2*finish, z_top, z_bottom, step, z_step, None, undercut, retract=False)
-            self.frame(c_x, c_y, x, y, z_top, z_bottom, step, inside=True, feature="Finishing pass inside finish")
-        else:
-            if z_step is None: z_step = self.tool.diameter
-            z_passes = math.ceil(depth/z_step)
-            z_step = depth/z_passes
-            short = min(x,y)
-            ramp_short = min(short-self.tool.diameter, 3/4*self.tool.diameter)
-            long = max(x,y)
-            ramp_long = ramp_short + long - short
-            ramp_x = ramp_long if x > y else ramp_short
-            ramp_y = ramp_long if y > x else ramp_short
-            if step is None: step = self.tool.diameter/10
-            passes = 2*math.ceil((x-ramp_x-self.tool.diameter)/step/2)
-            if passes == 0:
-                passes = 1
-            step = (x-ramp_x-self.tool.diameter)/passes
-            self.retract(comment="Retract")
-
-            turtle = self.turtle(verbose=True)
-            turtle._isdown = True
-            turtle.goto(c_x-ramp_x/2, c_y+ramp_y/2, z_top)
-            # Spiral Down
-            for i in range(2*z_passes+2):
-                turtle.forward(ramp_x, -z_step/4 if i < 2*z_passes else 0, comment=f"Ramp pass {i}")
-                turtle.right(90)
-                turtle.forward(ramp_y, -z_step/4 if i < 2*z_passes else 0, comment=f"Ramp pass {i}")
-                turtle.right(90)
-            # Spiral Out
-            turtle.left(90)
-            turtle.forward(step)
-            turtle.right(90)
-            for i in range(passes-2):
-                turtle.forward(ramp_x+(i+1)*step)
-                turtle.right(90)
-                turtle.forward(ramp_y+(i+2)*step)
-                turtle.right(90)
-
-            # On final pass, ramp to final dimension (x,y,z) in one corner, then finish all four sides.
-            # Add undercuts on each corner if needed
-            d = self.tool.diameter
-            h = d*math.sqrt(2)
-            s = 1/2*(h-d)
-            corner = math.sqrt((s**2)/2)
-
-            turtle.forward(x-step-d)
-            if undercut:
-                turtle.left(45)
-                turtle.forward(corner)
-                turtle.back(corner)
-                turtle.right(45)
-            turtle.right(90)
-            turtle.forward(y-d)
-            if undercut:
-                turtle.left(45)
-                turtle.forward(corner)
-                turtle.back(corner)
-                turtle.right(45)
-            turtle.right(90)
-            turtle.forward(x-d)
-            if undercut:
-                turtle.left(45)
-                turtle.forward(corner)
-                turtle.back(corner)
-                turtle.right(45)
-            turtle.right(90)
-            turtle.forward(y-d)
-            if undercut:
-                turtle.left(45)
-                turtle.forward(corner)
-                turtle.back(corner)
-                turtle.right(45)
-            turtle.right(90)
-            turtle.forward(step)
-            turtle.circle(-2*d, steps=10, extent=10)
-        if retract:
-            self.retract(c_x, c_y)
-        self.queue(comment='Turtle Pocket | END', style='feature')
-
-
-################################################################################
-# Legacy Pocket
+# Rect Pocket
 ################################################################################
 
     def legacy_pocket(self, c_x, c_y, x, y, depth, step=None, finish=0.1, undercut=False, retract=True):
-        self.queue(comment=f"Legacy Rectangular Pocket | center: {['{:.4f}'.format(c_x), '{:.4f}'.format(c_y)]}, x: {x:.4f}, y: {y:.4f}, depth: {depth}, step: {step}, finish: {finish}, undercut: {undercut}", style='feature')
+        self.queue(comment=f"Rectangular Pocket | center: {['{:.4f}'.format(c_x), '{:.4f}'.format(c_y)]}, x: {x:.4f}, y: {y:.4f}, depth: {depth}, step: {step}, finish: {finish}, undercut: {undercut}", style='feature')
         if not self.tool:
             raise ValueError(f"{RED}You can't cut a pocket without selecting a tool first")
         if depth > self.tool.flute_length:
@@ -723,17 +606,7 @@ class Machine:
         if retract:
             self.rapid(c_x, c_y, self.safe_z, comment="Retract")
 
-        self.queue(comment='Legacy Rectangular Pocke | END', style='feature')
-
-################################################################################
-# Fan Control
-################################################################################
-
-    def fan_on(self, s=256):
-        self.queue(code='M106', s=s, comment=f"Setting fan to {s}")
-
-    def fan_off(self):
-        self.queue(code='M107', comment="Turning fan off")
+        self.queue(comment='Rectangular Pocket | END', style='feature')
 
 ################################################################################
 # Turtle Object Reference
@@ -819,22 +692,5 @@ class Machine:
     def print_gcode(self):
         if not self.gcode:
             self.generate_gcode()
-        #print(self.gcode) #GRP commented out
-        x = self.gcode #GRP added
-        return x #GRP added
-
-################################################################################
-# Save G-code to File
-################################################################################
-
-    def save_gcode(self, filename=script+'.nc'):
-        if not self.gcode:
-            self.generate_gcode()
-        with open(filename, 'w') as file:
-            file.write(self.gcode)
-
-
-
-
-
-
+        x = self.gcode
+        return x
