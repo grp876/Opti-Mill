@@ -1,15 +1,16 @@
-Opti-Mill is a G-Code creator for creating simple shapes without requiring or learning a complicated CAM or 3D package. Testing is on a Sherline CNC Mill using a GRBL friendly - FluidNC motion controller, CNCjs and a Raspberry Pi 5.  The original manual mill was converted to a CNC-ready mill using Sherline.com OEM parts then the hunt for stepper motors, a controller board, 24VDC power supply and the Raspberry Pi with software began.  A much longer task then anticipated.  Luckily, I currently do not have the need for something as complex as LinxCNC or similiar CAM packages so this Python GUI was created.
+Opti-Mill is a G-Code creator for creating simple shapes without requiring or learning a complicated CAM or 3D package. Testing is on a Sherline CNC Mill using a GRBL friendly - FluidNC motion controller, CNCjs and a Raspberry Pi 5.  Basically this is an attempt to fill the void between writing your own G-Code and going full blown CAD/CAM software package.  Enjoy and keep on building!
 
 <img width="902" height="837" alt="image" src="https://github.com/user-attachments/assets/5fe4d6f2-1827-440b-9a97-03d9876b1300" />
-
-Opti-Mill - The G-Code Creator for CNC Mill using GRBL - FluidNC motion controlller, CNCjs and Raspberry PI 4, 5.  Programmed using Windows 11 - VS Code so it should be Windows friendly.  Please help educate me where possible to improve this program.  As always positive comments are appriciated.  Negative comments are welcome but please have a solution with it start your own program and comment on it.  With that said, I tend to take a multiple day sketch on a white board then go build it type of approach to developing.  "Quick proof" of concept then get the CAD and CAM softwares out for venturing down the continous improvement and multiple production build route (hobby or otherwise).  Until then Opti-Mill meets my needs.  Keep on building!
-
 
  ##### Disclaimer: ##### 
 
 Use this software at your own risk. Check the gcode thoroughly before running it on your machine. Everything you do with this software is your choice and responsibility. I hope it is useful, but I cannot be held responsible for injury or damage, even if it's due to errors in the software. CNC machines are dangerous. Be smart about it. As we all know, 0.001 is way different than 0.1. Coding in python or straight G-Code always can have clerical errors that cost money, lead to injury, death or just being surprised. Check and understand your G-Code before utilizing any G-Code generator - even expensive ones.
 
- ##### Opti-Mill - Metric: ##### 
+ ##### About the Testing System #####
+
+The original Sherline manual mill was converted to a CNC-ready mill using OEM parts then the hunt for non-OEM stepper motors, a controller board, 24VDC power supply and the Raspberry Pi with software began.  A much longer task then anticipated.  Luckily, I currently do not have the need for something as complex as LinxCNC or similiar CAM packages so this Python GUI was created.
+
+ ##### Opti-Mill - Currently only Metric: ##### 
 
 Opti-Mill - Metric is a GUI to generate G-Code for bolt circles, rectangular pockets, frames, circular pockets, helix and more. No need to hunt for a free CAM package or slow yourself down with learning one that came with your 3D package (unless your doing complex contours). Please note this was build on the shoulder of awesomeness. The pygdk code that runs in the background does most of the math. This GUI helps me utilize the pygdk package without writing scripts. It has required some adjustments to the original pygdk code so the G-Code could be utilized with my Sherline Mill, FluidNC CNC controller and CNCjs. Both this program, CNCjs and FluidNC run on a Raspberry Pi5 with no problems (as of 07/31/2025). CNCjs install instructions can be found at cncjs. website or you can do what I did and utilized https://github.com/cncjs/cncjs-pi-raspbian to create a SD card ready to go with Raspbian and CNCjs.
 
