@@ -8,23 +8,22 @@ Use this software at your own risk. Check the gcode thoroughly before running it
 
  ##### About the Testing System #####
 
-The original Sherline manual mill was converted to a CNC-ready mill using OEM parts then the hunt for non-OEM stepper motors, a controller board, 24VDC power supply and the Raspberry Pi with software began.  A much longer task then anticipated.  Luckily, I currently do not have the need for something as complex as LinxCNC or similiar CAM packages so this Python GUI was created.
+The original Sherline manual mill was converted to a CNC-ready mill using OEM parts then the hunt for non-OEM stepper motors, a motion controller board, 24VDC power supply and the Raspberry Pi with software began.  A much longer task then anticipated.  Luckily, I currently do not have the need for something as complex as LinxCNC or similiar CAM packages so this Python GUI was created.
+
+The motion controller is an extremely flexible motion controller from FluidNC (http://wiki.fluidnc.com/en/hardware/existing_hardware). I also utilize CNCjs (https://cnc.js.org/) which is free. Both this program, CNCjs and FluidNC run on a Raspberry Pi5 with no problems (as of 07/31/2025). CNCjs installation instructions can be found on the cncjs website or you can utilized (https://github.com/cncjs/cncjs-pi-raspbian) to create an SD card ready to go with Raspbian and CNCjs.
 
  ##### Opti-Mill - Currently only Metric: ##### 
 
-Opti-Mill - Metric is a GUI to generate G-Code for bolt circles, rectangular pockets, frames, circular pockets, helix and more. No need to hunt for a free CAM package or slow yourself down with learning one that came with your 3D package (unless your doing complex contours). Please note this was build on the shoulder of awesomeness. The pygdk code that runs in the background does most of the math. This GUI helps me utilize the pygdk package without writing scripts. It has required some adjustments to the original pygdk code so the G-Code could be utilized with my Sherline Mill, FluidNC CNC controller and CNCjs. Both this program, CNCjs and FluidNC run on a Raspberry Pi5 with no problems (as of 07/31/2025). CNCjs install instructions can be found at cncjs. website or you can do what I did and utilized https://github.com/cncjs/cncjs-pi-raspbian to create a SD card ready to go with Raspbian and CNCjs.
-
-About FluidNC controller - (https://github.com/bdring/FluidNC) and FluidNC controllers can be found at (http://wiki.fluidnc.com/en/hardware/existing_hardware). The wiki sites are amazing and will step you through the install process. I have no connection with these guys but I have bought two of their products. One a pen plotter TMC2209 and also the 4x CNC Controller (Integrated ESP32 and TMC2209) which is currently being installed on the Sherline mill. FluidNC has alot of flexiblility with it's ability to utilize multiple axis (I believe they have up to six axis) so feel free to adjust the sherline.json file in the machine folder to fit your machine requirements. You can also rename the file but it will need to be updated in the MagicBox Metric .py file.
+Opti-Mill is a GUI to generate G-Code for bolt circles, rectangular pockets, frames, circular pockets, helix and more. No need to hunt for a free CAM package or slow yourself down with learning one that came with your 3D package (unless your doing complex contours). Please note this was build on the shoulder of awesomeness. The pygdk code that runs in the background does most of the math. This GUI helps me utilize the pygdk package without writing scripts. It has required some adjustments to the original pygdk code so the G-Code could be utilized with the FluidNC controller and CNCjs.
 
  ##### Tooling and Feeds & Speeds JSON: ##### 
 
 Speeds and feeds are based on the tool_data.json file. Original values were based on Sherline.com manual for there CNC ready mills (I haven't tested these yet but I'm assuming Sherline knows their machines - which are GREAT). Diameters that fall outside of the tool_data speed and rpm interpolation curves will throw an error. You will need to expand this table based on your testing. I attempted to expand to the common 3/8' but this was only utilizing an online software tool. Actual testing will occur in the future when I have a good source of materials.
 
-tap_drill_chart.json can be expanded to include various threads you would like to utilize. - I've misplaced my card stock tap-chart cheat sheet one to many times. So ultimately I would like this json document to contain any thread types that the Sherline CNC ready mill can handle.
+tap_drill_chart.json can be expanded to include various threads you would like to utilize. - I've misplaced my card stock tap-chart cheat sheet one to many times. So ultimately I would like this json document to contain any thread types that the Sherline CNC mill can handle.
 
 tool_inventory.json is a list of all your tools.
 
-Keep on building!
 
  ##### The GUI: ##### 
 
