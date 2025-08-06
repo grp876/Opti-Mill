@@ -10,7 +10,7 @@ Use this software at your own risk. Check the gcode thoroughly before running it
 
 The original Sherline manual mill was converted to a CNC-ready mill using OEM parts then the hunt for non-OEM stepper motors, a motion controller board, 24VDC power supply and the Raspberry Pi with software began.  A much longer task then anticipated.  Luckily, I currently do not have the need for something as complex as LinxCNC or similiar CAM packages so this Python GUI was created.
 
-The motion controller is an extremely flexible motion controller from FluidNC (http://wiki.fluidnc.com/en/hardware/existing_hardware). I also utilize CNCjs (https://cnc.js.org/) which is free. Both this program, CNCjs and FluidNC run on a Raspberry Pi5 with no problems (as of 07/31/2025). CNCjs installation instructions can be found on the cncjs website or you can utilized (https://github.com/cncjs/cncjs-pi-raspbian) to create an SD card ready to go with Raspbian and CNCjs.
+The motion controller is an extremely flexible motion controller from FluidNC (http://wiki.fluidnc.com/en/hardware/existing_hardware). I also utilize CNCjs as the g-code sender (https://cnc.js.org/) which is free. Both this program, CNCjs and FluidNC run on a Raspberry Pi5 with no problems (as of 07/31/2025). CNCjs installation instructions can be found on the cncjs website or you can utilized (https://github.com/cncjs/cncjs-pi-raspbian) to create an SD card ready to go with Raspbian and CNCjs.
 
  ##### Opti-Mill - Currently only Metric: ##### 
 
@@ -54,7 +54,7 @@ machine.bolt_circle(c_x, c_y, n, r, depth)
 
   r is the radius of the bolt circle
 
-  depth is how deep to drill each hole
+  depth is how deep to drill each hole (use a negivate number)
 
  <img width="902" height="835" alt="image" src="https://github.com/user-attachments/assets/b5e526a5-8a24-46dd-a840-b532828c3c0e" />
 
