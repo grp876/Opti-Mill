@@ -13,7 +13,7 @@ The original Sherline mill was converted to be CNC-ready using OEM parts then th
 Main Components (I'm sure this list will grow but the main components are here):
 
 - Motion Controller: FluidNC 4x CNC Controller (Integrated ESP32 and TMC2209) from Bart Dring's Tindie account via FluidNC (http://wiki.fluidnc.com/en/hardware/existing_hardware) - My cost was $49 plus tax and shipping (6/23/25).
-- G-Code Sender: CNCjs is a web-based interface that allows the user to communicate with the motion controller.  Also known as the g-code sender (https://github.com/cncjs/cncjs-pi-raspbian), CNCjs is free with donations always welcomed. 
+- G-Code Sender: CNCjs is a web-based interface that allows the user to communicate with the motion controller.  Also known as the g-code sender (https://github.com/cncjs/cncjs-pi-raspbian), CNCjs is free with donations always welcomed (no connection). 
 - Raspberry Pi5 w/ 8GB ram: Faster than needed, cheap and low component failure due to the dusty and vibrating environment made this my goto. As of 08/07/25 it looks like a Pi5 with 8GB RAM, 32 microSD card, Micro-HDMI to HDMI cable converter, Pi power supply and case are roughly $120 before tax and shipping. 
 - Stepper Motors:
 - 24VDC Power Supply:
