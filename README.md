@@ -8,11 +8,18 @@ Use this software at your own risk. Check the gcode thoroughly before running it
 
  ##### About the Testing System #####
 
-The original Sherline manual mill was converted to a CNC-ready mill using OEM parts then the hunt for non-OEM stepper motors, a motion controller board, 24VDC power supply and the Raspberry Pi with software began.  A much longer task then anticipated.  Luckily, I currently do not have the need for something as complex as LinxCNC or similiar CAM packages so this Python GUI was created.
+The original Sherline mill was converted to be CNC-ready using OEM parts then the hunt for non-OEM stepper motors, motion controller, 24VDC power supply and the Raspberry Pi with software began.  A much longer task then anticipated.  With a quick sketch and go build it approach to my shop flow, CAD and CAM packages where left in retirement and insteaded, this Python GUI was created.
 
-The motion controller is an extremely flexible motion controller from FluidNC (http://wiki.fluidnc.com/en/hardware/existing_hardware). I also utilize CNCjs as the g-code sender (https://cnc.js.org/) which is free. Both this program, CNCjs and FluidNC run on a Raspberry Pi5 with no problems (as of 07/31/2025). CNCjs installation instructions can be found on the cncjs website or you can utilized (https://github.com/cncjs/cncjs-pi-raspbian) to create an SD card ready to go with Raspbian and CNCjs.
+Main Components (I'm sure this list will grow but the main components are here):
 
- ##### Opti-Mill - Currently only Metric: ##### 
+- Motion Controller: FluidNC 4x CNC Controller (Integrated ESP32 and TMC2209) from Bart Dring's Tindie account via FluidNC (http://wiki.fluidnc.com/en/hardware/existing_hardware) - My cost was $49 plus tax and shipping (6/23/25).
+- G-Code Sender: CNCjs is a web-based interface that allows the user to communicate with the motion controller.  Also known as the g-code sender (https://github.com/cncjs/cncjs-pi-raspbian), CNCjs is free with donations always welcomed. 
+- Raspberry Pi5 w/ 8GB ram: Faster than needed, cheap and low component failure due to the dusty and vibrating environment made this my goto. As of 08/07/25 it looks like a Pi5 with 8GB RAM, 32 microSD card, Micro-HDMI to HDMI cable converter, Pi power supply and case are roughly $120 before tax and shipping. 
+- Stepper Motors:
+- 24VDC Power Supply:
+
+
+ ##### Opti-Mill - Metric: ##### 
 
 Opti-Mill is a GUI to generate G-Code for bolt circles, rectangular pockets, frames, circular pockets, helix and more. No need to hunt for a free CAM package or slow yourself down with learning one that came with your 3D package (unless your doing complex contours). Please note this was build on the shoulder of awesomeness. The pygdk code that runs in the background does most of the math. This GUI helps me utilize the pygdk package without writing scripts. It has required some adjustments to the original pygdk code so the G-Code could be utilized with the FluidNC controller and CNCjs.
 
