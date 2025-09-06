@@ -1,7 +1,7 @@
 {
   "Name": "Metric Sherline",
   "Type": "Mill",
-  "Max Feed Rate (mm/min)": 80,
-  "Max Spindle RPM": 2000,
+  "Max Feed Rate (mm/min)": 150,
+  "Max Spindle RPM": 2800,
   "Tool Table": "tool_inventory.json"
 }
